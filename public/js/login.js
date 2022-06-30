@@ -4,9 +4,9 @@ const signUpHandler = async (event)=>{
     const su_username = document.querySelector('#signup-username').value.trim();
     const su_pwd = document.querySelector('#signup-pwd').value.trim();
 
-    // // todo: somekind of form validation
+    // todo: somekind of form validation
 
-    // // assume pass the validation
+    // assume pass the validation
     if(su_username && su_pwd){
         // fetch post user
         const response = await fetch('/api/users',{

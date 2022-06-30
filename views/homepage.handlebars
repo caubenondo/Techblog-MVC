@@ -1,1 +1,11 @@
-<h2>HOMEPAGE</h2>
+ {{!-- {{> navbar}} --}}
+
+<div class="container_lg">
+    <h2>HOMEPAGE</h2>
+    <h5>userid: {{user_id}}</h5>
+{{#each posts as |post|}}
+
+    <h3>{{post.name}}</h3>    
+    <p>{{post.description}}</p>
+{{/each}}
+</div>
