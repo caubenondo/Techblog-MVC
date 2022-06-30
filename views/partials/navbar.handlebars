@@ -4,7 +4,7 @@
 
         <ul class="nav nav-pills text-white">
 
-           
+
             {{#if logged_in}}
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard">Dashboard</a>
@@ -13,8 +13,8 @@
                 <button class="nav-link" id="logout-btn">Logout</button>
             </li>
             {{/if}}
-             {{#unless logged_in}}
-            
+            {{#unless logged_in}}
+
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
             </li>
