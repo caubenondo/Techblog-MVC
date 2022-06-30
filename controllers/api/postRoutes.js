@@ -1,4 +1,5 @@
 const { Post } = require('../../models');
+const { restore } = require('../../models/Post');
 const withAuth = require('../../utils/auth')
 const router = require('express').Router();
 
@@ -20,7 +21,7 @@ router.delete('/:id',withAuth,async (req,res)=>{
     try {
         const postData = await Post.destroy({
             where:{
-                id:req.param.id,
+                id:req.params.id,
                 user_id:req.session.user_id
             }
         })
@@ -31,6 +32,40 @@ router.delete('/:id',withAuth,async (req,res)=>{
         }
         res.status(200).json(postData)
 
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+router.put('/:id',withAuth,async (req,res)=>{
+    try {
+        console.log(req.body);
+        const postData = await Post.update({
+            name:req.body.name,
+            description:req.body.description,
+            user_id:req.session.user_id
+        },{where:{
+            id:req.params.id,
+            user_id:req.session.user_id
+        }})
+        
+
+        if(!postData){
+            res.status(404).json('not found')
+            return
+        }
+        res.status(200).json(postData)
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+router.get('/:id',async (req,res)=>{
+    try {
+        const postData = await Post.findByPk(req.params.id);
+        const thePost = postData.get({plain:true})
+        res.status(200).json(thePost);
     } catch (error) {
         res.status(500).json(error)
     }
