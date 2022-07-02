@@ -1,28 +1,20 @@
 
-<div class="container-lg">
-    <h2>Dashboard</h2>
+<div class="container-lg p-5">
+   
+   <div class="row">
+        <div class="col-4">
+              <h2>Dashboard</h2>
     <p>username: {{username}}</p>
    <p>userid: {{id}} </p>
    <p>userpass: {{password}}</p>
-   <div class="row">
-        <div class="col-4">
-             <form id="add-post" class="mb-5">
-                <div class="mb-3">
-                    <label for="post_name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="post_name" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="post_description">Post Description</label>
-                    <textarea class="form-control" placeholder="Leave a comment here" id="post_description"></textarea>
-
-                </div>
-                <button type="submit" class="btn btn-primary">Post</button>
-            </form>
         </div>
 
         <div class="col-8">
+              {{> addpostmodal}}
               {{>post-card}}
         </div>
+
+        
    </div>
    
 

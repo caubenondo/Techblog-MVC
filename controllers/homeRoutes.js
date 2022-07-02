@@ -20,6 +20,7 @@ router.get('/', async (req,res)=>{
             posts,
             logged_in: req.session.logged_in,
             user_id:req.session.user_id,
+            username: req.session.username
         })
 
     } catch (error) {
@@ -49,6 +50,7 @@ router.get('/dashboard', withAuth , async (req,res)=>{
         res.render('dashboard',{
             ...user,
             logged_in:true,
+            username: user.username
         })
     } catch (error) {
         res.status(400).json(error)
