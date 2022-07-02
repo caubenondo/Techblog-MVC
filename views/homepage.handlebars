@@ -3,16 +3,16 @@
 <div class="container ">
     
     <div class="row justify-content-center">
-        <h2 class="text-center">Feeds</h2>
+        <h2 class="text-center">Latest Feeds</h2>
         {{#each posts as |post|}}
         <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-body row">
-                    <div class="col-3 bg-light">
+                    <div class="col-3 border-end">
                         <h5>{{user.username}}</h5>
                         <p class="small text-muted">Posted on {{format_time post.date_created}}</p>
                     </div>
-                    <div class="col-8">
+                    <div class="col-9">
                         <h5 class="card-title">{{post.name}}</h5>
                         <pre style="white-space:pre-line" class="card-text">{{post.description}}</pre>
                     </div>

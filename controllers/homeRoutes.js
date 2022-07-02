@@ -15,11 +15,12 @@ router.get('/', async (req,res)=>{
             order:[['date_created','DESC']]
         })
         const posts = postData.map((post)=> post.get({plain:true}))
+        // res.json(req.session.user_id)
        
         res.render('homepage',{
             posts,
             logged_in: req.session.logged_in,
-            user_id:req.session.user_id,
+            user_id: req.session.user_id,
             username: req.session.username
         })
 

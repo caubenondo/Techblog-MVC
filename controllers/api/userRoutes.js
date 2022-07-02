@@ -10,11 +10,11 @@ router.post("/", async (req, res) => {
             username: req.body.su_username,
             password: req.body.su_pwd,
         });
-
+       
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
-
+            req.session.username = req.body.su_username
             res.status(200).json(userData);
         });
     } catch (error) {
@@ -44,6 +44,7 @@ router.post("/login", async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
+            req.session.username = req.body.lg_username
             res.status(200).json({ user: userData, message: "You are now logged in!" });
         });
     } catch (error) {
