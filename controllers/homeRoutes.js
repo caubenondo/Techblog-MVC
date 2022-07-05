@@ -1,4 +1,5 @@
 const { Post, User } = require('../models');
+const Comment = require('../models/Comment')
 const withAuth = require('../utils/auth');
 
 const router = require('express').Router();
@@ -10,18 +11,24 @@ router.get('/', async (req,res)=>{
                 {
                     model:User,
                     attributes:['username']
+                },{
+                    model: Comment,
+                    include: {model:User,attributes:['username']},
+                    attributes:['description','date_created','id']
                 }
             ],
             order:[['date_created','DESC']]
         })
-        const posts = postData.map((post)=> post.get({plain:true}))
-        // res.json(req.session.user_id)
-       
+        const posts = postData.map((post)=> post.get({plain:true}));
+
+        // res.json(posts)
+        
         res.render('homepage',{
-            posts,
+            posts,      
             logged_in: req.session.logged_in,
             user_id: req.session.user_id,
-            username: req.session.username
+            currentUser: req.session.currentUser,
+            randomstuff:'randomestuff'
         })
 
     } catch (error) {
@@ -43,15 +50,15 @@ router.get('/dashboard', withAuth , async (req,res)=>{
     try {
         const userData = await User.findByPk(req.session.user_id,{
             include:[{model:Post}],
-            attributes: {exclude:['password']}
+            attributes: {exclude:['password']},
+            order:[[{model:Post},'date_created','DESC']]
         })
 
         const user = userData.get({plain:true})
-
         res.render('dashboard',{
             ...user,
-            logged_in:true,
-            username: user.username
+            logged_in:req.session.logged_in,
+            currentUser: req.session.currentUser
         })
     } catch (error) {
         res.status(400).json(error)
