@@ -12,7 +12,7 @@
   * [Questions](#Questions)
 
   ## Installation <a name='Installation'></a>
-    To install necessary dependencies, run the following command:
+To install necessary dependencies, run the following command:
   ###### Install npm packages
   ```
     npm i
