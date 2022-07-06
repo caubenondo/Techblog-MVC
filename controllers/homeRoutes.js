@@ -1,11 +1,11 @@
 const { Post, User } = require('../models');
 const Comment = require('../models/Comment')
 const withAuth = require('../utils/auth');
-
 const router = require('express').Router();
 
 router.get('/', async (req,res)=>{
     try {
+        // JOIN TABLES
         const postData = await Post.findAll({
             include:[
                 {
@@ -21,14 +21,12 @@ router.get('/', async (req,res)=>{
         })
         const posts = postData.map((post)=> post.get({plain:true}));
 
-        // res.json(posts)
-        
+        // render posts as well as current logged in user
         res.render('homepage',{
             posts,      
             logged_in: req.session.logged_in,
             user_id: req.session.user_id,
-            currentUser: req.session.currentUser,
-            randomstuff:'randomestuff'
+            currentUser: req.session.currentUser          
         })
 
     } catch (error) {
@@ -36,6 +34,7 @@ router.get('/', async (req,res)=>{
     }
 })
 
+// if the user logged in, go to homepage
 router.get('/login',(req,res)=>{
     
     if(req.session.logged_in){
@@ -46,6 +45,7 @@ router.get('/login',(req,res)=>{
     
 })
 
+// Handle dashboard view
 router.get('/dashboard', withAuth , async (req,res)=>{
     try {
         const userData = await User.findByPk(req.session.user_id,{

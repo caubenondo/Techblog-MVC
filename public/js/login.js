@@ -1,4 +1,4 @@
-
+/* SIGN UP FORM HANDLING */
 const signUpHandler = async (event)=>{
     event.preventDefault();
     const su_username = document.querySelector('#signup-username').value.trim();
@@ -28,17 +28,15 @@ const signUpHandler = async (event)=>{
     console.log(su_pwd,su_username)
 }
 
-
 document.querySelector('#signup-form').addEventListener('submit',signUpHandler);
 
-
+/* LOGIN FORM HANDLING */
 const loginHandler = async (event) =>{
     event.preventDefault();
     const lg_username = document.querySelector('#login-username').value.trim();
     const lg_pwd = document.querySelector('#login-pwd').value.trim();
 
     // todo: need input validation
- 
     //passing validation
     if(lg_username && lg_pwd){
         const response = await fetch('/api/users/login',{
